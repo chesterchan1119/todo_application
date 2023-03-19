@@ -12,13 +12,13 @@ route.get('/', services.homeRoutes);
 
 /**
  *  @description add users
- *  @method GET /add-user
+ *  @method GET 
  */
 route.get('/add-user', services.add_user)
 
 /**
- *  @description for update user
- *  @method GET /update-user
+ *  @description for update task
+ *  @method GET 
  */
 route.get('/update-user', services.update_user)
 

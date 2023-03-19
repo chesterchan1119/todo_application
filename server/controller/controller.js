@@ -8,7 +8,7 @@ exports.create = (req,res)=>{
         return;
     }
 
-    // new user
+    // new task
     const user = new Userdb({
         name : req.body.name,
         email : req.body.email,
@@ -16,7 +16,7 @@ exports.create = (req,res)=>{
         status : req.body.status
     })
 
-    // save user in the database
+    // save task in the database
     user
         .save(user)
         .then(data => {
@@ -40,13 +40,13 @@ exports.find = (req, res)=>{
         Userdb.findById(id)
             .then(data =>{
                 if(!data){
-                    res.status(404).send({ message : "Not found user with id "+ id})
+                    res.status(404).send({ message : "Not found task with id "+ id})
                 }else{
                     res.send(data)
                 }
             })
             .catch(err =>{
-                res.status(500).send({ message: "Erro retrieving user with id " + id})
+                res.status(500).send({ message: "Erro retrieving task with id " + id})
             })
 
     }else{
@@ -55,7 +55,7 @@ exports.find = (req, res)=>{
                 res.send(user)
             })
             .catch(err => {
-                res.status(500).send({ message : err.message || "Error Occurred while retriving user information" })
+                res.status(500).send({ message : err.message || "Error Occurred while retriving task information" })
             })
     }
 
@@ -74,13 +74,13 @@ exports.update = (req, res)=>{
     Userdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
         .then(data => {
             if(!data){
-                res.status(404).send({ message : `Cannot Update user with ${id}. Maybe user not found!`})
+                res.status(404).send({ message : `Cannot Update task with ${id}. Maybe the task is not found!`})
             }else{
                 res.send(data)
             }
         })
         .catch(err =>{
-            res.status(500).send({ message : "Error Update user information"})
+            res.status(500).send({ message : "Error Update Task information"})
         })
 }
 
@@ -94,13 +94,13 @@ exports.delete = (req, res)=>{
                 res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`})
             }else{
                 res.send({
-                    message : "User was deleted successfully!"
+                    message : "Task was deleted successfully!"
                 })
             }
         })
         .catch(err =>{
             res.status(500).send({
-                message: "Could not delete User with id=" + id
+                message: "Could not delete task with id=" + id
             });
         });
 }
